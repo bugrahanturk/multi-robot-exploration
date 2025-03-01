@@ -1,0 +1,78 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="cmd_vel_topic" default="cmd_vel" />
+  <arg name="odom_topic" default="odom" />
+  <arg name="move_forward_only" default="false"/>
+  <arg name="ns0" default="tb3_0"/>
+  <arg name="ns1" default="tb3_1"/>
+  <arg name="ns2" default="tb3_2"/>
+  <arg name="ns3" default="tb3_3"/>
+
+  <!-- move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" ns="$(arg ns0)">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+      <!--	<param name="base_local_planner" value="circle_planner/CirclePlanner"/>--> 
+  	<!--<param name="base_global_planner" value="global_planner/EuclidPlanner"/> --> 
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns0)/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns0)/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns0)/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns0)/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns0)/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns0)/dwa_local_planner_params_$(arg model).yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <remap from="map" to="/map" />
+  </node>
+  
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" ns="$(arg ns1)">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+      <!--	<param name="base_local_planner" value="circle_planner/CirclePlanner"/>--> 
+  	<!--<param name="base_global_planner" value="global_planner/EuclidPlanner"/> --> 
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns1)/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns1)/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns1)/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns1)/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns1)/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns1)/dwa_local_planner_params_$(arg model).yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <remap from="map" to="/map" />
+  </node>
+  
+  
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" ns="$(arg ns2)">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+      <!--	<param name="base_local_planner" value="circle_planner/CirclePlanner"/>--> 
+  	<!--<param name="base_global_planner" value="global_planner/EuclidPlanner"/> --> 
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns2)/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns2)/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns2)/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns2)/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns2)/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns2)/dwa_local_planner_params_$(arg model).yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <remap from="map" to="/map" />
+  </node>
+  
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen" ns="$(arg ns3)">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+      <!--	<param name="base_local_planner" value="circle_planner/CirclePlanner"/>--> 
+  	<!--<param name="base_global_planner" value="global_planner/EuclidPlanner"/> --> 
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns3)/costmap_common_params_$(arg model).yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns3)/costmap_common_params_$(arg model).yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns3)/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns3)/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns3)/move_base_params.yaml" command="load" />
+    <rosparam file="$(find turtlebot3_navigation)/multi_param/$(arg ns3)/dwa_local_planner_params_$(arg model).yaml" command="load" />
+    <remap from="cmd_vel" to="$(arg cmd_vel_topic)"/>
+    <remap from="odom" to="$(arg odom_topic)"/>
+    <param name="DWAPlannerROS/min_vel_x" value="0.0" if="$(arg move_forward_only)" />
+    <remap from="map" to="/map" />
+  </node>
+  
+</launch>
